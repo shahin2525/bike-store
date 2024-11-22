@@ -1,5 +1,5 @@
-type TCategory = "Mountain" | "Road" | "Hybrid" | "Electric";
-type TBike = {
+type TCategory = 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
+export type TBike = {
   name: string;
   brand: string;
   price: number;
