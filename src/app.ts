@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 // bike routes
-app.use('/api/products/', BikeRoutes);
+app.use('/api/products', BikeRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -14,8 +14,9 @@ app.get('/', (req, res) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars, @typescript-eslint/no-unused-vars
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.json({
+    message: error._message,
     success: false,
-    message: error.message,
+    error: error,
   });
 });
 
