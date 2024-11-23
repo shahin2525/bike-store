@@ -16,7 +16,11 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.json({
     message: error._message,
     success: false,
-    error: error,
+    error: {
+      name: error.name,
+      errors: error.errors,
+    },
+    stack: `Error:something went wrong ${error.errors.price.path}`,
   });
 });
 
