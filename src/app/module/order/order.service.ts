@@ -11,13 +11,13 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   const productQuantity = findProductData?.quantity;
 
   const payLoadQuantity = payload?.quantity;
-  console.log(payLoadQuantity);
+  // console.log(payLoadQuantity);
   if (productQuantity < payLoadQuantity) {
     throw new Error('insufficient stock');
   }
 
   const newProductQuantity = productQuantity - payload.quantity;
-  console.log(newProductQuantity);
+  // console.log(newProductQuantity);
 
   if (newProductQuantity <= 0) {
     await Bike.findByIdAndUpdate(
@@ -36,7 +36,11 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   const result = await Order.create(payload);
   return result;
 };
-
+const calculateRevenueFromDB = async () => {
+  const allOrders = await Order.aggregate([]);
+  return allOrders;
+};
 export const OrderServices = {
   createOrderBikeIntoDB,
+  calculateRevenueFromDB,
 };
