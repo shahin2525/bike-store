@@ -1,14 +1,24 @@
 - # App_Name : Bike-Store
 
+---
+
 # . to start the app use : npm run start:dev
+
+---
 
 # . features of this app
 
 ## This app flow moduler pattern
 
-# [github-link](" ")
+---
+
+# [github-link]("https://github.com/shahin2525/bike-store")
+
+---
 
 # [vercel-live-deploy-link](" ")
+
+---
 
 # [explanation--video-link](" ")
 
