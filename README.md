@@ -12,7 +12,7 @@
 
 ---
 
-# [github-link]("https://github.com/shahin2525/bike-store")
+# [github-link](https://github.com/shahin2525/bike-store)
 
 ---
 
