@@ -1,21 +1,31 @@
-# . App_Name : Bike-Store
+- # App_Name : Bike-Store
 
-# .to start the app use : npm run start:dev
+# . to start the app use : npm run start:dev
 
-# .features of this app
+# . features of this app
 
 ## This app flow moduler pattern
 
-# .technologies name which are use for developing this app
+# [github-link](" ")
 
-## typescript
+# [vercel-live-deploy-link](" ")
 
-## express.js
+# [explanation--video-link](" ")
 
-## mongoose
+---
 
-## mongodb
+# . technologies name which are use for developing this app
 
-## dotenv
+## 1. typescript
 
-## cors
+## 2. express.js
+
+## 3. mongoose
+
+## 4. mongodb
+
+## 5. dotenv
+
+## 6. cors
+
+---
