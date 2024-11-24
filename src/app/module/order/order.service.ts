@@ -4,21 +4,21 @@ import { Order } from './order.model';
 
 const createOrderBikeIntoDB = async (payload: TOrder) => {
   const findProductData = await Bike.findById(payload.product);
-  // console.log(findProductData);
+
   if (!findProductData) {
     throw new Error('product data is not found');
   }
   const productQuantity = findProductData?.quantity;
 
   const payLoadQuantity = payload?.quantity;
-  // console.log(payLoadQuantity);
+
   if (productQuantity < payLoadQuantity) {
     throw new Error('insufficient stock');
   }
 
   const newProductQuantity = productQuantity - payload.quantity;
-  // console.log(newProductQuantity);
 
+  // add  inStock false if product quantity <=0
   if (newProductQuantity <= 0) {
     await Bike.findByIdAndUpdate(
       payload.product,
@@ -27,6 +27,7 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
     );
   }
 
+  // new quantity updated
   await Bike.findByIdAndUpdate(
     payload.product,
     { quantity: newProductQuantity },

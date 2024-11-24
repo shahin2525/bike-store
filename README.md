@@ -2,7 +2,7 @@
 
 ---
 
-# . to start the app use : npm run start:dev
+# . to start the app locally please use : npm run start:dev
 
 ---
 
@@ -16,7 +16,7 @@
 
 ---
 
-# [vercel-live-deploy-link](" ")
+# [vercel-live-deploy-link](https://bike-store-ashy.vercel.app/)
 
 ---
 
