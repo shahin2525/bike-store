@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
 import { BikeServices } from './bike.service';
-
+// create bike
 const createBike: RequestHandler = async (req, res, next) => {
   try {
     const data = req.body;
@@ -14,6 +14,7 @@ const createBike: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+// get all bike
 const getAllBike: RequestHandler = async (req, res, next) => {
   try {
     const result = await BikeServices.getAllBikeFromDB();

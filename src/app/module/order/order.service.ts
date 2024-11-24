@@ -37,8 +37,27 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   return result;
 };
 const calculateRevenueFromDB = async () => {
-  const allOrders = await Order.aggregate([]);
-  return allOrders;
+  const allOrdersRevenue = await Order.aggregate([
+    {
+      $project: {
+        revenue: '$totalPrice',
+      },
+    },
+    {
+      $group: {
+        _id: null,
+        totalRevenue: { $sum: '$revenue' },
+      },
+    },
+    {
+      $project: { _id: 0 },
+    },
+  ]);
+  if (allOrdersRevenue.length > 0) {
+    return allOrdersRevenue;
+  } else {
+    return 0;
+  }
 };
 export const OrderServices = {
   createOrderBikeIntoDB,

@@ -16,14 +16,14 @@ app.get('/', (req, res) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars, @typescript-eslint/no-unused-vars
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.json({
-    message: error._message || 'something went wrong',
+    message: error._message || error.message || 'something went wrong',
     success: false,
 
     error: {
       name: error?.name || error.message,
       errors: error?.errors || error.message,
     },
-    stack: `Error:something went wrong ${error?.errors}`,
+    stack: `Error:something went wrong/ ${error?.errors ? error?.errors : error.message}`,
   });
 });
 
