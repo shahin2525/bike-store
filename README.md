@@ -20,7 +20,7 @@
 
 ---
 
-# [explanation--video-link](https://drive.google.com/drive/folders/1J5wpkTb7PzFtWrZ3hg-137HhxCoG-EsK)
+# [explanation--video-link](https://drive.google.com/file/d/1r0dtoWyvo9rH0GlsK7_UdxTMW89LkQlc/view)
 
 ---
 
