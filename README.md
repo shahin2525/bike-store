@@ -12,10 +12,6 @@
 
 ---
 
-# [github-link](https://github.com/shahin2525/bike-store)
-
----
-
 # [vercel-live-deploy-link](https://bike-store-ashy.vercel.app/)
 
 ---
