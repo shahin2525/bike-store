@@ -7,11 +7,18 @@ app.use(express.json());
 app.use(cors());
 // bike routes
 app.use('/api/products', BikeRoutes);
+// order routes
 app.use('/api/orders', OrderRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+// catch all not found route
+app.all('*', function (req, res) {
+  console.log('404');
+  res.send('not found route');
+});
+
 // global error handler
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars, @typescript-eslint/no-unused-vars
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {

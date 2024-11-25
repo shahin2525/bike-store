@@ -10,10 +10,17 @@ const getAllBikeFromDB = async () => {
   return result;
 };
 const getSingleBikeFromDB = async (id: string) => {
+  if (await Bike.doesNotBikeExist(id)) {
+    throw new Error('product id  does not exist');
+  }
+
   const result = await Bike.findById(id);
   return result;
 };
 const updateBikeFromDB = async (id: string, data: Partial<TBike>) => {
+  if (await Bike.doesNotBikeExist(id)) {
+    throw new Error('product id  does not exist');
+  }
   const result = await Bike.findByIdAndUpdate(id, data, {
     new: true,
     runValidators: true,
@@ -22,6 +29,9 @@ const updateBikeFromDB = async (id: string, data: Partial<TBike>) => {
 };
 
 const deleteBikeFromDB = async (id: string) => {
+  if (await Bike.doesNotBikeExist(id)) {
+    throw new Error('product id  does not exist');
+  }
   const result = await Bike.findByIdAndDelete(id);
   return result;
 };
