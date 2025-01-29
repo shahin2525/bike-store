@@ -2,13 +2,14 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { BikeRoutes } from './app/module/bike/bike.route';
 import { OrderRoutes } from './app/module/order/order.route';
+import router from './app/routes';
 const app = express();
 app.use(express.json());
 app.use(cors());
 // bike routes
-app.use('/api/products', BikeRoutes);
+app.use('/api', router);
 // order routes
-app.use('/api/orders', OrderRoutes);
+// app.use('/api/orders', OrderRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
