@@ -70,9 +70,8 @@ const calculateRevenueFromDB = async () => {
   }
 };
 const deleteOrderFromDB = async (id: string) => {
-  const order = await Order.isOrderExists(id);
-  if (!order) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'order does not found');
+  if (!(await Order.isOrderExists(id))) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'order id not found');
   }
 
   const result = await Order.findByIdAndDelete(id);
@@ -80,8 +79,8 @@ const deleteOrderFromDB = async (id: string) => {
 };
 
 const updateOrderFromDB = async (id: string, data: Partial<TOrder>) => {
-  if (await Order.isOrderExists(id)) {
-    throw new Error('order id  does not exist');
+  if (!(await Order.isOrderExists(id))) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'order id  not found');
   }
   const result = await Order.findByIdAndUpdate(id, data, {
     new: true,
@@ -94,8 +93,8 @@ const getAllOrderFromDB = async () => {
   return result;
 };
 const getSingleOrderFromDB = async (id: string) => {
-  if (await Order.isOrderExists(id)) {
-    throw new Error('order does not exist');
+  if (!(await Order.isOrderExists(id))) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'order id not found');
   }
 
   const result = await Order.findById(id);

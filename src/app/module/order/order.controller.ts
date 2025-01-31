@@ -33,7 +33,7 @@ const calculateTotalRevenue: RequestHandler = async (req, res, next) => {
 
 const deleteOrder: RequestHandler = async (req, res, next) => {
   try {
-    const id = req.params.id;
+    const id = req.params.orderId;
     // console.log(userData);
     await OrderServices.deleteOrderFromDB(id);
     res.status(StatusCodes.OK).json({
@@ -47,7 +47,7 @@ const deleteOrder: RequestHandler = async (req, res, next) => {
 };
 const updateOrder: RequestHandler = async (req, res, next) => {
   try {
-    const id = req.params.productId;
+    const id = req.params.orderId;
     const data = req.body;
     const result = await OrderServices.updateOrderFromDB(id, data);
     res.status(200).json({
@@ -74,7 +74,7 @@ const getAllOrder: RequestHandler = async (req, res, next) => {
 // get single order
 const getSingleOrder: RequestHandler = async (req, res, next) => {
   try {
-    const id = req.params.productId;
+    const id = req.params.orderId;
     const result = await OrderServices.getSingleOrderFromDB(id);
     res.status(200).json({
       status: true,

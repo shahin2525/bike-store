@@ -9,9 +9,9 @@ import { User } from '../module/user/user.model';
 const auth = (...requiredRoles: TUserRole[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req.headers.authorization);
+      // console.log(req.headers.authorization);
       const token = req.headers.authorization?.split(' ')[1];
-      console.log(token);
+      // console.log(token);
       if (!token) {
         throw new AppError(StatusCodes.UNAUTHORIZED, 'you are unauthorize 1');
       }
@@ -27,6 +27,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
       if (deactivate) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 3');
       }
+      // console.log('role', role);
+      // console.log('required role', requiredRoles);
       if (requiredRoles && !requiredRoles.includes(role)) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 4');
       }

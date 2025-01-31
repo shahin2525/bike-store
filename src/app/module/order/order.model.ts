@@ -36,6 +36,5 @@ OrderSchema.statics.isOrderExists = async function (id: string) {
   return isOrderExists;
 };
 // 3. Create a Model.
-// export const Blog = model<TOrder, OrderModel>('Blog', OrderSchema);
 
 export const Order = model<TOrder, OrderModel>('Order', OrderSchema);
