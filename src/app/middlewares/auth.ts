@@ -23,8 +23,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
       if (!user) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 2');
       }
-      const isBlocked = user.isBlocked;
-      if (isBlocked) {
+      const deactivate = user.deactivate;
+      if (deactivate) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 3');
       }
       if (requiredRoles && !requiredRoles.includes(role)) {

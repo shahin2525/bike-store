@@ -5,7 +5,7 @@ export type TOrder = {
   product: Types.ObjectId;
   quantity: number;
   totalPrice: number;
-  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered';
+  status: 'Pending' | 'Processing' | 'Delivered';
 };
 
 export interface OrderModel extends Model<TOrder> {

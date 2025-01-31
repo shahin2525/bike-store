@@ -21,7 +21,7 @@ const OrderSchema = new Schema<TOrder, OrderModel>(
     },
     status: {
       type: String,
-      enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+      enum: ['Pending', 'Processing', 'Delivered'],
       default: 'Pending',
     },
   },

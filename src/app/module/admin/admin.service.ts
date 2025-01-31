@@ -19,6 +19,8 @@ const blockUserFromDB = async (id: string) => {
   return result;
 };
 
+
+
 // const deleteOrderFromDB = async (id: string) => {
 //   const bike = await Bike.doesNotBikeExist(id);
 //   if (!bike) {
