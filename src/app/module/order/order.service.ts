@@ -1,3 +1,5 @@
+import { StatusCodes } from 'http-status-codes';
+import AppError from '../../error/appError';
 import { Bike } from '../bike/bike.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
@@ -37,6 +39,7 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   const result = await Order.create(payload);
   return result;
 };
+
 const calculateRevenueFromDB = async () => {
   const allOrdersRevenue = await Order.aggregate([
     {
@@ -60,7 +63,43 @@ const calculateRevenueFromDB = async () => {
     return 0;
   }
 };
+const deleteOrderFromDB = async (id: string) => {
+  const order = await Order.isOrderExists(id);
+  if (!order) {
+    throw new AppError(StatusCodes.NOT_FOUND, 'order does not found');
+  }
+
+  const result = await Order.findByIdAndDelete(id);
+  return result;
+};
+
+const updateOrderFromDB = async (id: string, data: Partial<TOrder>) => {
+  if (await Order.isOrderExists(id)) {
+    throw new Error('order id  does not exist');
+  }
+  const result = await Order.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
+};
+const getAllOrderFromDB = async () => {
+  const result = await Order.find();
+  return result;
+};
+const getSingleOrderFromDB = async (id: string) => {
+  if (await Order.isOrderExists(id)) {
+    throw new Error('order does not exist');
+  }
+
+  const result = await Order.findById(id);
+  return result;
+};
 export const OrderServices = {
   createOrderBikeIntoDB,
   calculateRevenueFromDB,
+  deleteOrderFromDB,
+  updateOrderFromDB,
+  getSingleOrderFromDB,
+  getAllOrderFromDB,
 };

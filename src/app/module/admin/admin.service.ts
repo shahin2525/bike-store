@@ -20,16 +20,16 @@ const blockUserFromDB = async (id: string) => {
   return result;
 };
 
-const deleteBikeFromDB = async (id: string) => {
-  const bike = await Bike.doesNotBikeExist(id);
-  if (!bike) {
-    throw new AppError(StatusCodes.NOT_FOUND, 'bike does not found');
-  }
+// const deleteOrderFromDB = async (id: string) => {
+//   const bike = await Bike.doesNotBikeExist(id);
+//   if (!bike) {
+//     throw new AppError(StatusCodes.NOT_FOUND, 'bike does not found');
+//   }
 
-  const result = await Bike.findByIdAndDelete(id);
-  return result;
-};
+//   const result = await Bike.findByIdAndDelete(id);
+//   return result;
+// };
 export const AdminServices = {
   blockUserFromDB,
-  deleteBikeFromDB,
+  // deleteOrderFromDB,
 };

@@ -9,5 +9,9 @@ const router = Router();
 //   auth(USER_ROLE.admin),
 //   AdminController.blockUser,
 // );
-// router.delete('/blogs/:id', auth(USER_ROLE.admin), AdminController.deleteBlog);
+router.delete(
+  '/orders/:id',
+  auth(USER_ROLE.admin),
+  AdminController.deleteOrder,
+);
 export const AdminRoutes = router;

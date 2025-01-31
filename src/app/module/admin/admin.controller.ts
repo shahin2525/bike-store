@@ -17,22 +17,22 @@ import { StatusCodes } from 'http-status-codes';
 //   }
 // };
 
-// const deleteBlog: RequestHandler = async (req, res, next) => {
-//   try {
-//     const id = req.params.id;
-//     // console.log(userData);
-//     await AdminServices.deleteBlogFromDB(id);
-//     res.status(StatusCodes.OK).json({
-//       success: true,
-//       message: 'Blog deleted successfully',
-//       statusCode: StatusCodes.OK,
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+const deleteOrder: RequestHandler = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    // console.log(userData);
+    await AdminServices.deleteOrderFromDB(id);
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: 'Order deleted successfully',
+      statusCode: StatusCodes.OK,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const AdminController = {
   // blockUser,
-  // deleteBlog,
+  deleteOrder,
 };

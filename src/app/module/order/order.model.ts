@@ -32,10 +32,10 @@ const OrderSchema = new Schema<TOrder, OrderModel>(
 
 // 3. Create a Model.
 OrderSchema.statics.isOrderExists = async function (id: string) {
-  const isOrderExists = await Blog.findById(id);
+  const isOrderExists = await Order.findById(id);
   return isOrderExists;
 };
 // 3. Create a Model.
-export const Blog = model<TOrder, OrderModel>('Blog', OrderSchema);
+// export const Blog = model<TOrder, OrderModel>('Blog', OrderSchema);
 
-export const Order = model<TOrder>('Order', OrderSchema);
+export const Order = model<TOrder, OrderModel>('Order', OrderSchema);
