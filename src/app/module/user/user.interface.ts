@@ -8,7 +8,7 @@ export type TUser = {
   email: string;
   password: string;
   role: 'customer' | 'admin';
-  isBlocked: boolean;
+  deactivate: boolean;
 };
 export interface UserModel extends Model<TUser> {
   isUserExists(email: string): Promise<TUser | null>;

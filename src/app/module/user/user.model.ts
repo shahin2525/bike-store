@@ -30,7 +30,7 @@ const userSchema = new Schema<TUser, UserModel>(
       enum: ['customer', 'admin'],
       default: 'customer',
     },
-    isBlocked: {
+    deactivate: {
       type: Boolean,
       default: false,
     },
