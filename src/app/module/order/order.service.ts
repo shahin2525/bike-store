@@ -22,7 +22,7 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   if (newProductQuantity <= 0) {
     await Bike.findByIdAndUpdate(
       payload.product,
-      { inStock: false },
+      { stock: false },
       { new: true, runValidators: true },
     );
   }

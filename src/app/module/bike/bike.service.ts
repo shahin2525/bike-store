@@ -30,7 +30,7 @@ const updateBikeFromDB = async (id: string, data: Partial<TBike>) => {
 
 const deleteBikeFromDB = async (id: string) => {
   if (await Bike.doesNotBikeExist(id)) {
-    throw new Error('product id  does not exist');
+    throw new Error('this bike id  does not exist');
   }
   const result = await Bike.findByIdAndDelete(id);
   return result;

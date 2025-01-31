@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { TOrder } from './order.interface';
+import { OrderModel, TOrder } from './order.interface';
 
-const OrderSchema = new Schema<TOrder>(
+const OrderSchema = new Schema<TOrder, OrderModel>(
   {
     email: { type: String, required: [true, 'email is required'] },
     product: {
@@ -19,6 +19,11 @@ const OrderSchema = new Schema<TOrder>(
       required: [true, 'total price is required'],
       min: 0,
     },
+    status: {
+      type: String,
+      enum: ['Pending', 'Processing', 'Shipped', 'Delivered'],
+      default: 'Pending',
+    },
   },
   {
     timestamps: true,
@@ -26,4 +31,11 @@ const OrderSchema = new Schema<TOrder>(
 );
 
 // 3. Create a Model.
+OrderSchema.statics.isOrderExists = async function (id: string) {
+  const isOrderExists = await Blog.findById(id);
+  return isOrderExists;
+};
+// 3. Create a Model.
+export const Blog = model<TOrder, OrderModel>('Blog', OrderSchema);
+
 export const Order = model<TOrder>('Order', OrderSchema);

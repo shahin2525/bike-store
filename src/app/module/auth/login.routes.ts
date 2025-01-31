@@ -20,4 +20,4 @@ router.post(
   // validateRequest(AuthValidation.refreshTokenValidationSchema),
   LoginController.refreshToken,
 );
-export const LoginRoutes = router;
+export const AuthRoutes = router;

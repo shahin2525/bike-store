@@ -5,6 +5,11 @@ const BikeSchema = new Schema<TBike, BikeModel>(
   {
     name: { type: String, required: [true, 'Name is required.'] },
     brand: { type: String, required: [true, 'Brand is required.'] },
+    model: { type: String, required: [true, 'Model is required.'] },
+    bikeImage: {
+      type: String,
+      required: [true, 'ProductImage is required.'],
+    },
     price: { type: Number, required: [true, 'Price is required.'] },
     category: {
       type: String,
@@ -16,7 +21,7 @@ const BikeSchema = new Schema<TBike, BikeModel>(
     },
     description: { type: String, required: [true, 'Description is required.'] },
     quantity: { type: Number, required: [true, 'Quantity is required.'] },
-    inStock: {
+    stock: {
       type: Boolean,
       default: true,
       required: [true, 'inStock is required'],
