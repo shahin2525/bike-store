@@ -8,16 +8,22 @@ const createOrderBikeIntoDB = async (payload: TOrder) => {
   const findProductData = await Bike.findById(payload.product);
 
   if (!findProductData) {
-    throw new Error('product data is not found');
+    throw new AppError(StatusCodes.BAD_REQUEST, 'Bike  is not found');
   }
   const productQuantity = findProductData?.quantity;
 
   const payLoadQuantity = payload?.quantity;
 
   if (productQuantity < payLoadQuantity) {
-    throw new Error('insufficient stock');
+    throw new AppError(StatusCodes.BAD_REQUEST, 'insufficient stock');
   }
-
+  const productStock = findProductData.stock;
+  if (!productStock) {
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      'Bike stock does not available',
+    );
+  }
   const newProductQuantity = productQuantity - payload.quantity;
 
   // add  inStock false if product quantity <=0
