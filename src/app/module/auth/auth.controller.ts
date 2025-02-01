@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 
 import StatusCodes from 'http-status-codes';
-import { LoginServices } from './login.service';
-import { LoginValidations } from './login.validation';
+import { LoginServices } from './auth.service';
+import { LoginValidations } from './auth.validation';
 import config from '../../config';
 
 const loginUser: RequestHandler = async (req, res, next) => {

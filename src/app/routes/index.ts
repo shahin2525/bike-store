@@ -4,7 +4,7 @@ import { UserRoutes } from '../module/user/user.routes';
 
 import { AdminRoutes } from '../module/admin/admin.routes';
 import { BikeRoutes } from '../module/bike/bike.route';
-import { AuthRoutes } from '../module/auth/login.routes';
+import { AuthRoutes } from '../module/auth/auth.routes';
 import { OrderRoutes } from '../module/order/order.route';
 
 const router = Router();

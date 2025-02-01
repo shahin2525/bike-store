@@ -2,18 +2,18 @@ import { StatusCodes } from 'http-status-codes';
 import config from '../../config';
 import AppError from '../../error/appError';
 import { User } from '../user/user.model';
-import { TLoginUser } from './login.interface';
+import { TLoginUser } from './auth.interface';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { hashSync } from 'bcryptjs';
 
 const loginUser = async (payload: TLoginUser) => {
   const user = await User.isUserExists(payload?.email);
   if (!user) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials 1');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'you are unauthorize');
   }
-  const isUserBlock = user.isBlocked;
+  const isUserBlock = user.deactivate;
   if (isUserBlock) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials 2');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'you are deactivated');
   }
 
   const isPasswordMatch = await User.isPasswordMatch(
@@ -64,9 +64,9 @@ const changePassword = async (
   }
   // checking if the user is blocked
 
-  const isUserBlock = user.isBlocked;
+  const isUserBlock = user.deactivate;
   if (isUserBlock) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'Invalid credentials 2');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'you are deactivated');
   }
 
   // checking if the user password is match
@@ -100,7 +100,7 @@ const changePassword = async (
 };
 const refreshToken = async (token: string) => {
   if (!token) {
-    throw new AppError(StatusCodes.UNAUTHORIZED, 'you are unauthorize 1');
+    throw new AppError(StatusCodes.UNAUTHORIZED, 'you are unauthorize ');
   }
 
   const decoded = jwt.verify(token, config.jwt_refresh_secret as string);
@@ -109,11 +109,11 @@ const refreshToken = async (token: string) => {
   const { email } = data;
   const user = await User.isUserExists(email);
   if (!user) {
-    throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 2');
+    throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize ');
   }
-  const isBlocked = user.isBlocked;
+  const isBlocked = user.deactivate;
   if (isBlocked) {
-    throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 3');
+    throw new AppError(StatusCodes.FORBIDDEN, 'you are deactivated ');
   }
   const jwtPayload = {
     email: user.email,

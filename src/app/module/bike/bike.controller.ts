@@ -17,7 +17,7 @@ const createBike: RequestHandler = async (req, res, next) => {
 // get all bike
 const getAllBike: RequestHandler = async (req, res, next) => {
   try {
-    const result = await BikeServices.getAllBikeFromDB();
+    const result = await BikeServices.getAllBikeFromDB(req.query);
     res.status(200).json({
       status: true,
       message: 'Bikes retrieved successfully',

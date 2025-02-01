@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { LoginController } from './login.controller';
+import { LoginController } from './auth.controller';
 import { USER_ROLE } from '../user/user.const';
 import auth from '../../middlewares/auth';
 
@@ -10,7 +10,7 @@ router.post('/login', LoginController.loginUser);
 
 router.post(
   '/change-password',
-  auth(USER_ROLE.admin, USER_ROLE.user),
+  auth(USER_ROLE.admin, USER_ROLE.customer),
   //   validateRequest(AuthValidation.changePasswordValidationSchema),
   LoginController.changePassword,
 );
