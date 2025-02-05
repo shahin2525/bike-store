@@ -19,7 +19,7 @@ const loginUser: RequestHandler = async (req, res, next) => {
     res.cookie('refreshToken', refreshToken, {
       secure: config.NODE_ENV === 'production',
       httpOnly: true,
-      // sameSite: 'none',
+      sameSite: 'strict',
       maxAge: 1000 * 60 * 60 * 24 * 365,
     });
 
