@@ -33,7 +33,7 @@ const loginUser = async (payload: TLoginUser) => {
       data: jwtPayload,
     },
     config.jwt_secret as string,
-    { expiresIn: '1d' },
+    { expiresIn: '2d' },
   );
   const refreshToken = jwt.sign(
     {
@@ -125,7 +125,7 @@ const refreshToken = async (token: string) => {
       data: jwtPayload,
     },
     config.jwt_secret as string,
-    { expiresIn: '1d' },
+    { expiresIn: '2d' },
   );
 
   // console.log(accessToken);

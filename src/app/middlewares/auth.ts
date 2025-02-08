@@ -15,8 +15,16 @@ const auth = (...requiredRoles: TUserRole[]) => {
       if (!token) {
         throw new AppError(StatusCodes.UNAUTHORIZED, 'you are unauthorize 1');
       }
-      const decoded = jwt.verify(token, config.jwt_secret as string);
+      let decoded;
+      try {
+        decoded = jwt.verify(token, config.jwt_secret as string);
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+      } catch (error) {
+        throw new AppError(StatusCodes.UNAUTHORIZED, 'Unauthorize');
+      }
+
       //   console.log(decoded);
+
       const { data } = decoded as JwtPayload;
       const { email, role } = data;
       const user = await User.isUserExists(email);
