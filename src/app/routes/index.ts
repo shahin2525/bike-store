@@ -19,6 +19,10 @@ const routesModule = [
     route: UserRoutes,
   },
   {
+    path: '/customer/',
+    route: CustomerRoutes,
+  },
+  {
     path: '/products',
     route: BikeRoutes,
   },
