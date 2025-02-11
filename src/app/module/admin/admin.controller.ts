@@ -9,7 +9,7 @@ const deactivateUser: RequestHandler = async (req, res, next) => {
     await AdminServices.blockUserFromDB(id);
     res.status(StatusCodes.OK).json({
       success: true,
-      message: 'User deactivate successfully',
+      message: 'Customer deactivate successfully',
       statusCode: StatusCodes.OK,
     });
   } catch (error) {

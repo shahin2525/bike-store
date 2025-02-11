@@ -10,7 +10,7 @@ const createUserIntoDB = async (payload: TUser) => {
   return result;
 };
 const getSingleUserFromDB = async (id: string) => {
-  if (await User.doesUserExists(id)) {
+  if (!(await User.doesUserExists(id))) {
     throw new Error('user id  does not exist');
   }
 
@@ -21,8 +21,16 @@ const getAllUserFromDB = async () => {
   const result = await User.find();
   return result;
 };
+const deleteUserFromDB = async (id: string) => {
+  if (!(await User.doesUserExists(id))) {
+    throw new Error('user id  does not exist');
+  }
+  const result = await User.findByIdAndDelete(id);
+  return result;
+};
 export const UserServices = {
   createUserIntoDB,
   getSingleUserFromDB,
   getAllUserFromDB,
+  deleteUserFromDB,
 };

@@ -6,6 +6,7 @@ import { AdminRoutes } from '../module/admin/admin.routes';
 import { BikeRoutes } from '../module/bike/bike.route';
 import { AuthRoutes } from '../module/auth/auth.routes';
 import { OrderRoutes } from '../module/order/order.route';
+import { CustomerRoutes } from '../module/user/user.customer.routes';
 
 const router = Router();
 
@@ -19,7 +20,7 @@ const routesModule = [
     route: UserRoutes,
   },
   {
-    path: '/customer/',
+    path: '/customers/',
     route: CustomerRoutes,
   },
   {
