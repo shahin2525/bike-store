@@ -92,12 +92,17 @@ const getAllOrderFromDB = async () => {
   const result = await Order.find();
   return result;
 };
+
 const getSingleOrderFromDB = async (id: string) => {
   if (!(await Order.isOrderExists(id))) {
     throw new AppError(StatusCodes.NOT_FOUND, 'order id not found');
   }
 
   const result = await Order.findById(id);
+  return result;
+};
+const getAllOrderByEmailForSingleCustomerFromDB = async (email: string) => {
+  const result = await Order.find({ email });
   return result;
 };
 export const OrderServices = {
@@ -107,4 +112,5 @@ export const OrderServices = {
   updateOrderFromDB,
   getSingleOrderFromDB,
   getAllOrderFromDB,
+  getAllOrderByEmailForSingleCustomerFromDB,
 };

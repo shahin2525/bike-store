@@ -85,6 +85,26 @@ const getSingleOrder: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+// get all order for single user
+const getAllOrderByEmailForSingleCustomer: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  try {
+    const email = req.params.email;
+    console.log(email);
+    const result =
+      await OrderServices.getAllOrderByEmailForSingleCustomerFromDB(email);
+    res.status(200).json({
+      status: true,
+      message: 'get all orders for single customers retrieved successfully',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 export const OrderControllers = {
   deleteOrder,
   createOrderBike,
@@ -92,4 +112,5 @@ export const OrderControllers = {
   updateOrder,
   getAllOrder,
   getSingleOrder,
+  getAllOrderByEmailForSingleCustomer,
 };
