@@ -3,8 +3,11 @@ import AppError from '../../error/appError';
 import { Bike } from '../bike/bike.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
+import { User } from '../user/user.model';
 
-const createOrderBikeIntoDB = async (payload: TOrder) => {
+const createOrderBikeIntoDB = async (userEmail: string, payload: TOrder) => {
+  const user = await User.isUserExists(userEmail);
+
   const findProductData = await Bike.findById(payload.product);
 
   if (!findProductData) {

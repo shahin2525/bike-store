@@ -4,8 +4,14 @@ import { StatusCodes } from 'http-status-codes';
 
 const createOrderBike: RequestHandler = async (req, res, next) => {
   try {
+    const userEmail = req.user?.data.email;
+    // console.log('user', userEmail);
+    // const user
     const payload = req.body;
-    const result = await OrderServices.createOrderBikeIntoDB(payload);
+    const result = await OrderServices.createOrderBikeIntoDB(
+      userEmail,
+      payload,
+    );
 
     res.status(200).json({
       message: 'Order  created successfully',

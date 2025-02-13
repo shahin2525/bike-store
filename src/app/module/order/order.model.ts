@@ -14,11 +14,11 @@ const OrderSchema = new Schema<TOrder, OrderModel>(
       required: [true, 'quantity is required'],
       min: 1,
     },
-    totalPrice: {
-      type: Number,
-      required: [true, 'total price is required'],
-      min: 0,
-    },
+    // totalPrice: {
+    //   type: Number,
+    //   required: [true, 'total price is required'],
+    //   min: 0,
+    // },
     status: {
       type: String,
       enum: ['Pending', 'Processing', 'Delivered'],
