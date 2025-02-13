@@ -7,7 +7,7 @@ import { User } from '../user/user.model';
 
 const createOrderBikeIntoDB = async (userEmail: string, payload: TOrder) => {
   const user = await User.isUserExists(userEmail);
-
+  // console.log(user);
   const findProductData = await Bike.findById(payload.product);
 
   if (!findProductData) {
@@ -45,7 +45,19 @@ const createOrderBikeIntoDB = async (userEmail: string, payload: TOrder) => {
     { new: true, runValidators: true },
   );
 
-  const result = await Order.create(payload);
+  console.log(payload);
+
+  const totalPrice = findProductData.price * payload.quantity;
+
+  console.log(totalPrice);
+
+  const result = await Order.create({
+    email: payload.email,
+    product: payload.product,
+    quantity: payload.quantity,
+    totalPrice,
+  });
+  console.log(result);
   return result;
 };
 
