@@ -4,8 +4,13 @@ import { Bike } from '../bike/bike.model';
 import { TOrder } from './order.interface';
 import { Order } from './order.model';
 import { User } from '../user/user.model';
+import { orderUtils } from './order.utils';
 
-const createOrderBikeIntoDB = async (userEmail: string, payload: TOrder) => {
+const createOrderBikeIntoDB = async (
+  userEmail: string,
+  payload: TOrder,
+  client_ip: string,
+) => {
   const user = await User.isUserExists(userEmail);
   // console.log(user);
   const findProductData = await Bike.findById(payload.product);
@@ -45,20 +50,35 @@ const createOrderBikeIntoDB = async (userEmail: string, payload: TOrder) => {
     { new: true, runValidators: true },
   );
 
-  console.log(payload);
+  // console.log(payload);
 
   const totalPrice = findProductData.price * payload.quantity;
 
-  console.log(totalPrice);
-
-  const result = await Order.create({
+  // console.log(totalPrice);
+  let order = await Order.create({
     email: payload.email,
     product: payload.product,
     quantity: payload.quantity,
     totalPrice,
   });
-  console.log(result);
-  return result;
+  // console.log(order);
+
+  const shurjopayPayload = {
+    amount: totalPrice,
+
+    order_id: order._id,
+    currency: 'BDT',
+    customer_name: user?.name,
+    customer_address: user?.address,
+    customer_email: user?.email,
+    customer_phone: user?.phone,
+    customer_city: user?.city,
+    client_ip,
+  };
+
+  const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
+
+  return { order, payment };
 };
 
 const calculateRevenueFromDB = async () => {

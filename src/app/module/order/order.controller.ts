@@ -11,6 +11,7 @@ const createOrderBike: RequestHandler = async (req, res, next) => {
     const result = await OrderServices.createOrderBikeIntoDB(
       userEmail,
       payload,
+      req.ip!,
     );
 
     res.status(200).json({
