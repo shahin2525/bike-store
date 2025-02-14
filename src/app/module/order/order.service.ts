@@ -137,6 +137,38 @@ const getAllOrderFromDB = async () => {
   return result;
 };
 
+// payment verify
+const verifyPayment = async (order_id: string) => {
+  console.log(order_id);
+  const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
+
+  if (verifiedPayment.length) {
+    await Order.findOneAndUpdate(
+      {
+        'transaction.id': order_id,
+      },
+      {
+        'transaction.bank_status': verifiedPayment[0].bank_status,
+        'transaction.sp_code': verifiedPayment[0].sp_code,
+        'transaction.sp_message': verifiedPayment[0].sp_message,
+        'transaction.transactionStatus': verifiedPayment[0].transaction_status,
+        'transaction.method': verifiedPayment[0].method,
+        'transaction.date_time': verifiedPayment[0].date_time,
+        status:
+          verifiedPayment[0].bank_status == 'Success'
+            ? 'Paid'
+            : verifiedPayment[0].bank_status == 'Failed'
+              ? 'Pending'
+              : verifiedPayment[0].bank_status == 'Cancel'
+                ? 'Cancelled'
+                : '',
+      },
+    );
+  }
+
+  return verifiedPayment;
+};
+
 const getSingleOrderFromDB = async (id: string) => {
   if (!(await Order.isOrderExists(id))) {
     throw new AppError(StatusCodes.NOT_FOUND, 'order id not found');
@@ -157,4 +189,5 @@ export const OrderServices = {
   getSingleOrderFromDB,
   getAllOrderFromDB,
   getAllOrderByEmailForSingleCustomerFromDB,
+  verifyPayment,
 };

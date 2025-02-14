@@ -23,6 +23,34 @@ const createOrderBike: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+// verify payment
+
+// const verifyPayment = catchAsync(async (req, res) => {
+//   const order = await orderService.verifyPayment(req.query.order_id as string);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.CREATED,
+//     message: "Order verified successfully",
+//     data: order,
+//   });
+// });
+
+const verifyPayment: RequestHandler = async (req, res, next) => {
+  try {
+    const result = await OrderServices.verifyPayment(
+      req.query.order_id as string,
+    );
+    console.log(result);
+    res.status(200).json({
+      status: true,
+      message: 'Order verified successfully',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // calculate total revenue
 const calculateTotalRevenue: RequestHandler = async (req, res, next) => {
   try {
@@ -100,7 +128,7 @@ const getAllOrderByEmailForSingleCustomer: RequestHandler = async (
 ) => {
   try {
     const email = req.params.email;
-    console.log(email);
+    // console.log(email);
     const result =
       await OrderServices.getAllOrderByEmailForSingleCustomerFromDB(email);
     res.status(200).json({
@@ -120,4 +148,5 @@ export const OrderControllers = {
   getAllOrder,
   getSingleOrder,
   getAllOrderByEmailForSingleCustomer,
+  verifyPayment,
 };
