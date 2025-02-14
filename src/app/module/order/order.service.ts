@@ -78,7 +78,16 @@ const createOrderBikeIntoDB = async (
 
   const payment = await orderUtils.makePaymentAsync(shurjopayPayload);
 
-  return { order, payment };
+  if (payment?.transactionStatus) {
+    order = await order.updateOne({
+      transaction: {
+        id: payment.sp_order_id,
+        transactionStatus: payment.transactionStatus,
+      },
+    });
+  }
+
+  return payment.checkout_url;
 };
 
 const calculateRevenueFromDB = async () => {
