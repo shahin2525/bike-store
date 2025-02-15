@@ -139,7 +139,7 @@ const getAllOrderFromDB = async () => {
 
 // payment verify
 const verifyPayment = async (order_id: string) => {
-  console.log(order_id);
+  // console.log(order_id);
   const verifiedPayment = await orderUtils.verifyPaymentAsync(order_id);
 
   if (verifiedPayment.length) {

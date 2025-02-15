@@ -35,8 +35,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
       if (deactivate) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 3');
       }
-      console.log('role', role);
-      console.log('required role', requiredRoles);
+      // console.log('role', role);
+      // console.log('required role', requiredRoles);
       if (requiredRoles && !requiredRoles.includes(role)) {
         throw new AppError(StatusCodes.FORBIDDEN, 'you are unauthorize 4');
       }

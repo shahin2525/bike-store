@@ -40,7 +40,7 @@ const verifyPayment: RequestHandler = async (req, res, next) => {
     const result = await OrderServices.verifyPayment(
       req.query.order_id as string,
     );
-    console.log(result);
+    // console.log(result);
     res.status(200).json({
       status: true,
       message: 'Order verified successfully',
