@@ -30,8 +30,8 @@ const getAllBike: RequestHandler = async (req, res, next) => {
 // get single bike
 const getSingleBike: RequestHandler = async (req, res, next) => {
   try {
-    const user = req.user;
-    console.log(user);
+    // const user = req.user;
+    // console.log(user);
     const id = req.params.productId;
     const result = await BikeServices.getSingleBikeFromDB(id);
     res.status(200).json({

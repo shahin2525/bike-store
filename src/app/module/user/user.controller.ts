@@ -40,7 +40,7 @@ const getSingleUser: RequestHandler = async (req, res, next) => {
     const result = await UserServices.getSingleUserFromDB(id);
     res.status(200).json({
       status: true,
-      message: 'user retrieved successfully',
+      message: ' single user retrieved successfully',
       data: result,
     });
   } catch (error) {
@@ -49,7 +49,7 @@ const getSingleUser: RequestHandler = async (req, res, next) => {
 };
 const deleteUser: RequestHandler = async (req, res, next) => {
   try {
-    const id = req.params.productId;
+    const id = req.params.id;
     await UserServices.deleteUserFromDB(id);
     res.status(200).json({
       status: true,
