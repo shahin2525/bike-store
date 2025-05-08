@@ -12,6 +12,9 @@ export type TUser = {
   address?: string;
   city?: string;
   deactivate: boolean;
+
+  createdAt?: string;
+  updatedAt?: string;
 };
 export interface UserModel extends Model<TUser> {
   isUserExists(email: string): Promise<TUser | null>;
